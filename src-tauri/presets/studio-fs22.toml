@@ -1,0 +1,47 @@
+# Farming Simulator 22, made by V987 Wheel Studio.
+#
+# The wheel values start from LiteStar's sim presets: ETS2, Assetto Corsa, ACC and rFactor 2 all
+# use 900 degrees, FFB 100 and damping 80. Two changes for FS22 with the FS22_WheelFFB mod:
+#   spring 80 (ETS2 uses 30). ETS2 sends one constant force and never uses a spring effect. The
+#     mod's centering and steering weight are spring and damper effects, and the wheel scales
+#     them by these values, so keep both high and tune the feel in [ffb_server].
+#   friction 50. Tractors already get weight from the damper, and extra friction wears your
+#     arms out on long field runs.
+
+format = 1
+id = "studio-fs22"
+name = "Farming Simulator 22"
+platform = "pc"
+source = "studio"
+game = "Farming Simulator 22"
+
+[notes]
+en = "Needs the FS22_WheelFFB mod. FS22's own force feedback doesn't work on Linux, so the mod sends tractor data to this app's FFB server instead. You get centering that builds with speed, heavy steering with the engine off, bumps, field and road texture, and engine vibration.\nApplying this preset sets the wheel to 900° with high spring and damping, and loads the tractor feel into the FFB server.\nTurn FS22's own force feedback off so the two don't fight."
+tr = "FS22_WheelFFB modu gerekir. FS22'nin kendi FFB'si Linux'ta çalışmıyor, bu yüzden mod traktörün verilerini bu uygulamanın FFB sunucusuna gönderiyor. Hızla artan merkezleme, motor kapalıyken ağırlaşan direksiyon, tümsekler, tarla ve yol dokusu ve motor titreşimi alırsınız.\nBu profil direksiyonu 900°'ye, yüksek yay ve sönümlemeye ayarlar, traktör hissini de FFB sunucusuna yükler.\nİkisi çakışmasın diye FS22'nin kendi FFB ayarını kapatın."
+
+[[links]]
+label = "FS22_WheelFFB mod (GitHub)"
+url = "https://github.com/egeSlop/FS22_WheelFFB"
+
+[wheel]
+angle = 900
+ffb = 100
+spring = 80
+damping = 80
+friction = 50
+inertia = 60
+reverse = false
+
+# Loaded into the FFB server when this preset is applied.
+[ffb_server]
+master_gain = 0.8
+
+[ffb_server.feel]
+centering = 0.55
+centering_parked = 0.08
+damping = 0.30
+damping_engine_off = 0.65
+bumps = 0.60
+impacts = 0.80
+texture = 0.25
+engine = 0.10

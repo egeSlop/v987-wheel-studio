@@ -1,0 +1,20 @@
+format = 1
+id = "vendor-749339814079508480"
+name = "F1 2021"
+platform = "xbox"
+source = "vendor"
+tutorial = "http://www.e-pxn.com.cn/view-article-cid-28-id-414.html"
+
+[notes]
+en = "Leave the wheel's force settings alone and tune force feedback in the game.\nLiteStar recommends:\n  Vibration & Force Feedback           On\n  Vibration & Force Feedback Strength  85\n  On Track Effects                     25\n  Rumble Strip Effects                 35\n  Off Track Effects                    40\n  Wheel Damper                         25\n  Enhanced Understeer Effect           On if you're new\n  Maximum Wheel Rotation               360\nWheel Damper 25 feels light and quick. Raise it a step at a time for a calmer wheel, but stay under 60."
+tr = "Direksiyonun kuvvet ayarlarına dokunmayın, FFB'yi oyunun içinden ayarlayın.\nLiteStar'ın önerisi (oyundaki adlarıyla):\n  Vibration & Force Feedback           On (titreşim ve FFB açık)\n  Vibration & Force Feedback Strength  85 (FFB gücü)\n  On Track Effects                     25 (pist üstü efektler)\n  Rumble Strip Effects                 35 (bordür efektleri)\n  Off Track Effects                    40 (pist dışı efektler)\n  Wheel Damper                         25 (direksiyon sönümü)\n  Enhanced Understeer Effect           yeniyseniz On\n  Maximum Wheel Rotation               360 (en fazla dönüş)\nWheel Damper 25'te direksiyon hafif ve çevik gelir. Daha sakin bir his için adım adım artırın ama 60'ı geçmeyin."
+zh = "方向盘力反馈参数默认配置下 在游戏设置内调节力反馈参数\n推荐游戏内参数为：\n振动和力反馈     开\n振动和力反馈强度      85\n赛道内音效                 25\n震动带音效                 35\n赛道外音效                 40\n车轮阻尼器                 25\n加强转向不足              新手建议开启\n最大方向盘转动           360\n车轮阻尼器 25为偏灵活手感 想要操控稳重可以逐渐增加 但不建议超过60"
+
+[wheel]
+angle = 900
+# The vendor stores no force values for this one (all 0): only the angle is applied.
+
+[vendor]
+id = "749339814079508480"
+mode = 8
+raw = "08000102030405060708090A0B0C0D11102F0E0F2F1415161718191A1B1C1D1E1F2021222384030000000000"

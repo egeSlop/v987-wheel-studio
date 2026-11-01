@@ -1,0 +1,3 @@
+[submodule "crates/ffb-server"]
+	path = crates/ffb-server
+	url = https://github.com/egeSlop/ffb-server

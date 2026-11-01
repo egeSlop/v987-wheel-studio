@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" font-family="system-ui, sans-serif">
+  <!--
+    3-pedal set (clutch / brake / throttle), front view. Hand-drawn stylised vector.
+    Interactive parts: class="ctl" + id + data-ctl. Each ctl carries its base
+    fill on itself and the body shape inherits it, so `.ctl.active { fill: … }`
+    recolours it while holes/screws keep their own fills.
+    Themed via CSS custom properties with fallbacks (see README).
+  -->
+  <defs>
+    <linearGradient id="p-deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="p-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.22"/>
+    </linearGradient>
+    <pattern id="p-brushed" width="40" height="3" patternUnits="userSpaceOnUse">
+      <path d="M0,0.5 H26 M8,2 H40" stroke="#000" stroke-opacity="0.10" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="p-nubs" width="22" height="20" patternUnits="userSpaceOnUse" x="48" y="279">
+      <rect x="2" y="2.6" width="8" height="6.4" rx="1" fill="#000" fill-opacity="0.55"/>
+      <rect x="2" y="2" width="8" height="5.6" rx="1" fill="#fff" fill-opacity="0.09"/>
+      <rect x="13" y="12.6" width="8" height="6.4" rx="1" fill="#000" fill-opacity="0.55"/>
+      <rect x="13" y="12" width="8" height="5.6" rx="1" fill="#fff" fill-opacity="0.09"/>
+    </pattern>
+    <!-- clutch/brake pad outline (clutch position; brake is translated) -->
+    <path id="p-pad" d="M106,26 L172,26 Q177,26 177.5,31 L179,92 L172,142 Q171,147 166,147 L112,147 Q107,147 106,142 L99,92 L100.5,31 Q101,26 106,26 Z"/>
+    <path id="p-pad-t" d="M425,15 L483,15 Q489,15 489,21 L490,177 Q490,183 484,183 L424,183 Q418,183 418,177 L419,21 Q419,15 425,15 Z"/>
+    <path id="p-screw" d="M-2.6,0 A2.6,2.6 0 1 0 2.6,0 A2.6,2.6 0 1 0 -2.6,0 Z M-1.6,0 H1.6 M0,-1.6 V1.6"/>
+  </defs>
+
+  <!-- ===== base plate (sloped pedal deck) ===== -->
+  <g id="base-plate" class="ctl" data-ctl="base-plate" fill="var(--dev-body, #1c1e22)">
+    <!-- side walls -->
+    <path fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1" d="M82,62 L68,68 L34,250 L44,258 Z M518,62 L532,68 L566,250 L556,258 Z"/>
+    <!-- deck -->
+    <path stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2" d="M82,62 L518,62 L556,258 L44,258 Z"/>
+    <path fill="url(#p-deck)" d="M82,62 L518,62 L556,258 L44,258 Z"/>
+    <!-- front lip -->
+    <path fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8" d="M44,258 L556,258 L556,263 L44,263 Z"/>
+    <!-- divider grooves between pedals -->
+    <g fill="var(--dev-edge, #3a3d44)">
+      <path d="M204,62 L211,62 L234,258 L227,258 Z"/>
+      <path d="M375,62 L382,62 L366,258 L359,258 Z"/>
+    </g>
+  </g>
+
+  <!-- ===== pedals ===== -->
+  <!-- clutch (left) -->
+  <g id="pedal-clutch" class="ctl" data-ctl="pedal-clutch" fill="var(--dev-metal, #b9bdc4)">
+    <rect x="110" y="140" width="58" height="22" rx="2" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8"/>
+    <use href="#p-pad" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <use href="#p-pad" fill="url(#p-brushed)"/>
+    <use href="#p-pad" fill="url(#p-metal)"/>
+    <g fill="var(--dev-shade, #121316)">
+      <circle cx="116" cy="52" r="8"/><circle cx="162" cy="52" r="8"/>
+      <circle cx="115" cy="122" r="9.5"/><circle cx="162" cy="122" r="9.5"/>
+    </g>
+    <g fill="var(--dev-edge, #3a3d44)" stroke="var(--dev-shade, #121316)" stroke-width="0.6">
+      <use href="#p-screw" x="138" y="66"/><use href="#p-screw" x="137" y="107"/>
+    </g>
+  </g>
+
+  <!-- brake (middle) -->
+  <g id="pedal-brake" class="ctl" data-ctl="pedal-brake" fill="var(--dev-metal, #b9bdc4)">
+    <rect x="270" y="140" width="58" height="22" rx="2" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8"/>
+    <g transform="translate(160 0)">
+      <use href="#p-pad" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+      <use href="#p-pad" fill="url(#p-brushed)"/>
+      <use href="#p-pad" fill="url(#p-metal)"/>
+    </g>
+    <g fill="var(--dev-shade, #121316)">
+      <circle cx="278" cy="52" r="8"/><circle cx="320" cy="52" r="8"/>
+      <circle cx="278" cy="122" r="9.5"/><circle cx="320" cy="122" r="9.5"/>
+    </g>
+    <g fill="var(--dev-edge, #3a3d44)" stroke="var(--dev-shade, #121316)" stroke-width="0.6">
+      <use href="#p-screw" x="297" y="66"/><use href="#p-screw" x="298" y="107"/>
+    </g>
+  </g>
+
+  <!-- throttle (right, taller) -->
+  <g id="pedal-throttle" class="ctl" data-ctl="pedal-throttle" fill="var(--dev-metal, #b9bdc4)">
+    <rect x="424" y="176" width="60" height="16" rx="2" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8"/>
+    <use href="#p-pad-t" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <use href="#p-pad-t" fill="url(#p-brushed)"/>
+    <use href="#p-pad-t" fill="url(#p-metal)"/>
+    <g fill="var(--dev-shade, #121316)">
+      <circle cx="436" cy="33" r="7"/><circle cx="472" cy="33" r="7"/>
+      <circle cx="436" cy="82" r="8"/><circle cx="474" cy="82" r="8"/>
+      <circle cx="437" cy="133" r="9.5"/><circle cx="476" cy="133" r="9.5"/>
+    </g>
+    <g fill="var(--dev-edge, #3a3d44)" stroke="var(--dev-shade, #121316)" stroke-width="0.6">
+      <use href="#p-screw" x="455" y="57"/><use href="#p-screw" x="455" y="108"/>
+    </g>
+  </g>
+
+  <!-- ===== heel rest (textured floor plate) ===== -->
+  <g id="heel-rest" class="ctl" data-ctl="heel-rest" fill="var(--dev-body, #1c1e22)">
+    <path stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2" d="M44,266 L556,266 L572,402 Q572,406 568,406 L32,406 Q28,406 28,402 Z"/>
+    <path fill="url(#p-deck)" d="M44,266 L556,266 L572,402 Q572,406 568,406 L32,406 Q28,406 28,402 Z"/>
+    <!-- raised textured field with heel notch at top centre -->
+    <path id="p-field" fill="url(#p-nubs)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8" d="
+      M58,276 L232,276 L250,313 L350,313 L368,276 L542,276 L556,396 L44,396 Z"/>
+    <!-- smooth heel pad in the notch -->
+    <rect x="248" y="272" width="104" height="33" rx="4" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8"/>
+  </g>
+</svg>

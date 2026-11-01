@@ -1,0 +1,23 @@
+format = 1
+id = "vendor-900057600719335424"
+name = "Euro Truck Simulator 2"
+platform = "pc"
+source = "vendor"
+tutorial = "https://www.bilibili.com/video/BV1k24y1c7th/?spm_id_from=333.999.0.0"
+
+[names]
+zh = "欧洲卡车模拟2"
+
+[wheel]
+angle = 900
+ffb = 100
+spring = 30
+damping = 80
+friction = 80
+inertia = 80
+reverse = false
+
+[vendor]
+id = "900057600719335424"
+mode = 3
+raw = "03000102030405060708090A0B0C0D11102F0E0F2F1415161718191A1B1C1D1E1F202122238403641E50505000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"

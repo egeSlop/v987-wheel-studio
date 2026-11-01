@@ -1,0 +1,23 @@
+format = 1
+id = "vendor-749336366223208448"
+name = "DiRT Rally 2.0"
+platform = "xbox"
+source = "vendor"
+tutorial = "http://www.e-pxn.com.cn/view-article-cid-28-id-414.html"
+
+[names]
+zh = "尘埃拉力赛2.0"
+
+[notes]
+en = "Leave the wheel's force settings alone and tune force feedback in the game.\nLiteStar recommends:\n  Vibration & Feedback           On\n  Self Aligning Torque           80\n  Suspension                     20\n  Tyre Slip                      100\n  Engine                         100\n  Collision                      15\n  Soft Lock                      150\n  Steering Centre Force Enabled  On\n  Steering Centre Force          150"
+tr = "Direksiyonun kuvvet ayarlarına dokunmayın, FFB'yi oyunun içinden ayarlayın.\nLiteStar'ın önerisi (oyundaki adlarıyla):\n  Vibration & Feedback           On (titreşim ve FFB açık)\n  Self Aligning Torque           80 (direksiyonun kendini toplaması)\n  Suspension                     20 (süspansiyon)\n  Tyre Slip                      100 (lastik kayması)\n  Engine                         100 (motor)\n  Collision                      15 (çarpma)\n  Soft Lock                      150 (açı sınırı)\n  Steering Centre Force Enabled  On (merkezleme açık)\n  Steering Centre Force          150 (merkezleme gücü)"
+zh = "方向盘力反馈参数默认配置下 在游戏设置内调节力反馈参数\n推荐游戏内参数为：\nVibration & Feedback   on\nSelf ligning Torque       80\nSuspension                  20\nTire Slip                        100\nEngine                          100\nCollision                         15\nSoft Lock                        150\nSteering Centre Force Enabled     on\nSteering Centre Force     150"
+
+[wheel]
+angle = 900
+# The vendor stores no force values for this one (all 0): only the angle is applied.
+
+[vendor]
+id = "749336366223208448"
+mode = 8
+raw = "08000102030405060708090A0B0C0D11102F0E0F2F1415161718191A1B1C1D1E1F2021222384030000000000"

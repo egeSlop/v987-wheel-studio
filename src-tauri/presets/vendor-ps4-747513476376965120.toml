@@ -1,0 +1,28 @@
+format = 1
+id = "vendor-747513476376965120"
+name = "Project CARS 2"
+platform = "ps4"
+source = "vendor"
+tutorial = "http://www.e-pxn.com.cn/view-article-cid-28-id-414.html"
+
+[names]
+zh = "赛车计划2"
+
+[notes]
+en = "Leave the wheel's force settings alone and tune force feedback in the game.\nLiteStar recommends:\n  Flavour  Raw\n  Gain     100\n  Volume   80\n  Tone     40\n  FX       60"
+tr = "Direksiyonun kuvvet ayarlarına dokunmayın, FFB'yi oyunun içinden ayarlayın.\nLiteStar'ın önerisi:\n  Flavour  Raw (ham)\n  Gain     100 (kazanç)\n  Volume   80 (seviye)\n  Tone     40 (ton)\n  FX       60 (efektler)"
+zh = "方向盘力反馈参数默认配置下 在游戏设置内调节力反馈参数\n推荐游戏内参数为：\n喜好   原始\n增益   100\n大小    80\n调性    40\nFX      60"
+
+[wheel]
+angle = 900
+ffb = 100
+spring = 80
+damping = 80
+friction = 80
+inertia = 80
+reverse = false
+
+[vendor]
+id = "747513476376965120"
+mode = 5
+raw = "05000102030405060708090A0B0C0D11102F0E0F2F1415161718191A1B1C1D1E1F2021222384036450505050"

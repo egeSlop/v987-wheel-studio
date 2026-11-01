@@ -1,0 +1,23 @@
+format = 1
+id = "vendor-900058355824078848"
+name = "Forza Horizon 5"
+platform = "pc"
+source = "vendor"
+tutorial = "https://www.bilibili.com/video/BV16g411v76f/?spm_id_from=333.999.0.0"
+
+[names]
+zh = "极限竞速：地平线5"
+
+[wheel]
+angle = 900
+ffb = 100
+spring = 60
+damping = 70
+friction = 80
+inertia = 70
+reverse = false
+
+[vendor]
+id = "900058355824078848"
+mode = 3
+raw = "03000102030405060708090A0B0C0D11102F0E0F2F1415161718191A1B1C1D1E1F202122238403643C46504600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"

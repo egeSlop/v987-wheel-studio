@@ -1,0 +1,11 @@
+# Some setups export CC pointing at a compiler that isn't installed; use the system gcc.
+[env]
+CC = { value = "gcc", force = true }
+CXX = { value = "g++", force = true }
+# Windows build from Linux (portable .exe): cargo build --release --target x86_64-pc-windows-gnu
+CC_x86_64_pc_windows_gnu = "x86_64-w64-mingw32-gcc"
+CXX_x86_64_pc_windows_gnu = "x86_64-w64-mingw32-g++"
+AR_x86_64_pc_windows_gnu = "x86_64-w64-mingw32-ar"
+
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"

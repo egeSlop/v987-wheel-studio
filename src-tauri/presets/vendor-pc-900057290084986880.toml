@@ -1,0 +1,23 @@
+format = 1
+id = "vendor-900057290084986880"
+name = "Assetto Corsa"
+platform = "pc"
+source = "vendor"
+tutorial = "https://www.bilibili.com/video/BV1LW4y1G77N/?spm_id_from=333.999.0.0"
+
+[names]
+zh = "神力科莎"
+
+[wheel]
+angle = 900
+ffb = 100
+spring = 50
+damping = 80
+friction = 50
+inertia = 50
+reverse = false
+
+[vendor]
+id = "900057290084986880"
+mode = 3
+raw = "03000102030405060708090A0B0C0D11102F0E0F2F1415161718191A1B1C1D1E1F202122238403643250323200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"

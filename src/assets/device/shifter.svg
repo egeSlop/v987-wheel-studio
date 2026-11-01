@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" font-family="system-ui, sans-serif">
+  <!--
+    H-pattern shifter, top view: three slots joined by one neutral channel (|-|-|).
+    1/2, 3/4, 5/6; reverse is the 6th-gear slot with the knob pushed down.
+    Handbrake (P) and LO/HI buttons on top.
+    Hand-drawn stylised vector. Interactive parts: class="ctl" + id + data-ctl.
+    Each ctl carries its base fill on itself and the body shape inherits it, so
+    `.ctl.active { fill: … }` recolours it while labels keep their own fills.
+    Themed via CSS custom properties with fallbacks (see README).
+  -->
+  <defs>
+    <linearGradient id="s-sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.02"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.25"/>
+    </linearGradient>
+    <radialGradient id="s-ball" cx="0.35" cy="0.7" r="0.75">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.35"/>
+    </radialGradient>
+    <linearGradient id="s-brushed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="s-recess" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.06"/>
+    </linearGradient>
+    <path id="s-screw" d="M-4.5,0 A4.5,4.5 0 1 0 4.5,0 A4.5,4.5 0 1 0 -4.5,0 Z"/>
+  </defs>
+
+  <!-- artwork drawn in reference-photo units; this transform fits it into the viewBox -->
+  <g transform="matrix(0.923 0 0 0.923 15.4 46.2)">
+  <!-- ===== body ===== -->
+  <g id="shifter-body" class="ctl" data-ctl="shifter-body" fill="var(--dev-body, #1c1e22)">
+    <!-- foot -->
+    <rect x="95" y="490" width="210" height="24" rx="6" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <!-- teardrop shell -->
+    <path stroke="var(--dev-edge, #3a3d44)" stroke-width="1.4" d="
+      M201,-13 C240,-13 260,8 268,40 L345,205 C370,250 384,300 384,360 C384,440 360,494 300,500
+      L100,500 C40,494 16,440 16,360
+      C16,300 30,250 55,205 L134,40 C142,8 162,-13 201,-13 Z"/>
+    <path fill="url(#s-sheen)" d="
+      M201,-13 C240,-13 260,8 268,40 L345,205 C370,250 384,300 384,360 C384,440 360,494 300,500
+      L100,500 C40,494 16,440 16,360
+      C16,300 30,250 55,205 L134,40 C142,8 162,-13 201,-13 Z"/>
+    <!-- raised top spine -->
+    <path fill="#fff" fill-opacity="0.05" stroke="var(--dev-edge, #3a3d44)" stroke-width="1" d="
+      M201,-3 C226,-3 238,10 245,30 L292,170 L110,170 L157,30 C164,10 176,-3 201,-3 Z"/>
+    <!-- collar around the knob -->
+    <path fill="none" stroke="var(--dev-edge, #3a3d44)" stroke-width="1" d="M58,300 C66,205 128,152 203,152 C278,152 340,205 348,300"/>
+    <!-- stacked lower tiers -->
+    <g fill="none" stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2">
+      <path d="M34,430 C55,468 120,480 200,480 C280,480 345,468 366,430"/>
+      <path d="M46,392 C62,438 120,452 200,452 C280,452 338,438 354,392"/>
+    </g>
+  </g>
+
+  <!-- ===== gate bezel + recess (decorative) ===== -->
+  <ellipse cx="200" cy="333" rx="142" ry="111" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2"/>
+  <ellipse cx="200" cy="333" rx="142" ry="111" fill="url(#s-sheen)"/>
+  <ellipse cx="200" cy="335" rx="112" ry="97" fill="var(--dev-body, #1c1e22)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+  <ellipse cx="200" cy="335" rx="112" ry="97" fill="url(#s-recess)"/>
+  <!-- screws -->
+  <g fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1">
+    <use href="#s-screw" x="72" y="303"/>
+    <use href="#s-screw" x="327" y="300"/>
+    <use href="#s-screw" x="200" y="407"/>
+  </g>
+
+  <!-- ===== H gate slots ===== -->
+  <g id="gate" class="ctl" data-ctl="gate" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2">
+    <path d="
+      M150,259 A9,9 0 0 1 168,259 L168,301 L195,301 L195,259 A9,9 0 0 1 213,259 L213,301 L240,301
+      L240,259 A9,9 0 0 1 258,259 L258,361 A9,9 0 0 1 240,361 L240,319 L213,319 L213,361
+      A9,9 0 0 1 195,361 L195,319 L168,319 L168,361 A9,9 0 0 1 150,361 Z"/>
+  </g>
+  <!-- gear stick shaft -->
+  <g fill="var(--dev-edge, #3a3d44)" stroke="var(--dev-shade, #121316)" stroke-width="1">
+    <ellipse cx="203" cy="320" rx="15" ry="12"/>
+    <rect x="196" y="270" width="14" height="50" rx="6"/>
+  </g>
+
+  <!-- ===== knob ===== -->
+  <g id="shifter-knob" class="ctl" data-ctl="shifter-knob" fill="var(--dev-ctl, #2a2d33)">
+    <circle cx="204" cy="192" r="86" stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2"/>
+    <circle cx="204" cy="192" r="86" fill="url(#s-ball)"/>
+    <!-- brushed-metal top face -->
+    <circle cx="204" cy="166" r="61" fill="var(--dev-metal, #b9bdc4)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <circle cx="204" cy="166" r="61" fill="url(#s-brushed)"/>
+  </g>
+
+  <!-- engraved H pattern on the knob face -->
+  <g fill="none" stroke="var(--dev-shade, #121316)" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round">
+    <path d="M172,128 L172,166 M194,128 L194,166 M216,128 L216,166 M172,147 L216,147"/>
+  </g>
+  <g font-size="11" text-anchor="middle" fill="var(--dev-shade, #121316)" fill-opacity="0.75">
+    <text x="172" y="119.5">1</text><text x="194" y="119.5">3</text><text x="216" y="119.5">5</text>
+    <text x="172" y="184">2</text><text x="194" y="184">4</text><text x="216" y="184">6</text>
+    <text x="234" y="170" font-weight="700">R</text>
+    <path d="M234,174 L234,181 M231,178.5 L234,181.5 L237,178.5" fill="none" stroke="var(--dev-shade, #121316)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- gear position markers (at the end of each engraved slot) -->
+  <g stroke="var(--dev-shade, #121316)" stroke-width="1">
+    <circle id="gear-r" class="ctl" data-ctl="gear-r" fill="var(--dev-ctl, #2a2d33)" fill-opacity="0.9" cx="216" cy="165" r="8.5"><title>R = 6 + push down</title></circle>
+    <circle id="gear-1" class="ctl" data-ctl="gear-1" fill="var(--dev-ctl, #2a2d33)" cx="172" cy="129" r="4.5"/>
+    <circle id="gear-3" class="ctl" data-ctl="gear-3" fill="var(--dev-ctl, #2a2d33)" cx="194" cy="129" r="4.5"/>
+    <circle id="gear-5" class="ctl" data-ctl="gear-5" fill="var(--dev-ctl, #2a2d33)" cx="216" cy="129" r="4.5"/>
+    <circle id="gear-2" class="ctl" data-ctl="gear-2" fill="var(--dev-ctl, #2a2d33)" cx="172" cy="165" r="4.5"/>
+    <circle id="gear-4" class="ctl" data-ctl="gear-4" fill="var(--dev-ctl, #2a2d33)" cx="194" cy="165" r="4.5"/>
+    <circle id="gear-6" class="ctl" data-ctl="gear-6" fill="var(--dev-ctl, #2a2d33)" cx="216" cy="165" r="4.5"/>
+  </g>
+
+  <!-- ===== top buttons ===== -->
+  <!-- (P) handbrake, top-left -->
+  <g id="btn-handbrake" class="ctl" data-ctl="btn-handbrake" fill="var(--dev-ctl, #2a2d33)">
+    <rect x="145" y="76" width="28" height="20" rx="5" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <g fill="none" stroke="var(--dev-label, #e6e7ea)" stroke-width="1.1" stroke-linecap="round">
+      <circle cx="159" cy="86" r="5.2"/>
+      <path d="M151.8,81.5 A8,8 0 0 0 151.8,90.5 M166.2,81.5 A8,8 0 0 1 166.2,90.5"/>
+    </g>
+    <text x="159" y="89" font-size="7" font-weight="700" text-anchor="middle" fill="var(--dev-label, #e6e7ea)">P</text>
+  </g>
+  <!-- LO/HI range button, top-right -->
+  <g id="btn-lohi" class="ctl" data-ctl="btn-lohi" fill="var(--dev-ctl, #2a2d33)">
+    <rect x="211" y="76" width="40" height="20" rx="5" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <rect x="214" y="80" width="34" height="12" rx="1.5" fill="none" stroke="var(--dev-label, #e6e7ea)" stroke-width="1"/>
+    <g font-size="6.5" font-weight="800" fill="var(--dev-label, #e6e7ea)">
+      <text x="216" y="88.6">LO</text><text x="237" y="88.6">HI</text>
+    </g>
+    <path d="M227,84.6 L235,84.6 L233.3,83.2 M235,87.4 L227,87.4 L228.7,88.8" fill="none" stroke="var(--dev-label, #e6e7ea)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  </g>
+</svg>

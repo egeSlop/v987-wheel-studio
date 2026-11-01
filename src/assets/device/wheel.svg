@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" font-family="system-ui, sans-serif">
+  <!--
+    Sim-racing wheel, front view. Hand-drawn stylised vector.
+    Interactive parts: class="ctl" + id + data-ctl. Each ctl carries its base
+    fill on itself and its body shape inherits it, so `.ctl.active { fill: … }`
+    recolours the control while labels/highlights keep their own fills.
+    Theme via CSS custom properties (see README): dev-body, dev-edge,
+    dev-label, dev-ctl, dev-carbon, dev-shade, dev-marker.
+  -->
+  <defs>
+    <linearGradient id="w-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0.03"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="w-hub" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="w-led" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2fd35a"/>
+      <stop offset="0.45" stop-color="#e4e02a"/>
+      <stop offset="1" stop-color="#ff7a1a"/>
+    </linearGradient>
+    <radialGradient id="w-cap" cx="0.4" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.6" stop-color="#fff" stop-opacity="0.02"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.2"/>
+    </radialGradient>
+    <pattern id="w-carbon" width="5" height="5" patternUnits="userSpaceOnUse">
+      <rect width="2.5" height="2.5" fill="#fff" fill-opacity="0.06"/>
+      <rect x="2.5" y="2.5" width="2.5" height="2.5" fill="#fff" fill-opacity="0.06"/>
+    </pattern>
+    <pattern id="w-grip" width="4" height="3.5" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="0.9" r="0.9" fill="#fff" fill-opacity="0.1"/>
+      <circle cx="3" cy="2.6" r="0.9" fill="#fff" fill-opacity="0.1"/>
+    </pattern>
+    <!-- rim geometry (outer contour + inner opening) -->
+    <path id="w-rim-shape" fill-rule="evenodd" clip-rule="evenodd" d="
+      M300,105 C412,105 503,188 503,296 C503,360 480,410 450,440 C420,470 380,483 300,483
+      C220,483 180,470 150,440 C120,410 97,360 97,296 C97,188 188,105 300,105 Z
+      M300,146 C345,146 378,150 401,160 L403,196 C404,210 420,218 430,226 C442,236 450,246 448,258
+      C447,266 460,280 465,300 C469,330 467,360 460,385 C455,405 448,418 435,430
+      C420,442 400,448 375,449 L225,449 C200,448 180,442 165,430 C152,418 145,405 140,385
+      C133,360 131,330 135,300 C140,280 153,266 152,258 C150,246 158,236 170,226
+      C180,218 196,210 197,196 L199,160 C222,150 255,146 300,146 Z"/>
+    <clipPath id="w-rim-clip"><use href="#w-rim-shape"/></clipPath>
+    <clipPath id="w-outer-clip"><path d="M300,105 C412,105 503,188 503,296 C503,360 480,410 450,440 C420,470 380,483 300,483
+      C220,483 180,470 150,440 C120,410 97,360 97,296 C97,188 188,105 300,105 Z"/></clipPath>
+    <!-- carbon spoke plate with its three see-through openings -->
+    <path id="w-spoke-shape" fill-rule="evenodd" d="
+      M120,286 C140,282 150,280 165,279 L230,271 L370,271 L435,279 C450,280 460,282 480,286 L480,470 L120,470 Z
+      M151,345 C185,338 222,336 250,340 L252,382 L205,429 C185,429 166,421 157,406 C150,388 149,366 151,345 Z
+      M449,345 C415,338 378,336 350,340 L348,382 L395,429 C415,429 434,421 443,406 C450,388 451,366 449,345 Z
+      M268,398 L332,398 L388,456 L212,456 Z"/>
+    <!-- one paddle blade (left); right is mirrored -->
+    <path id="w-paddle-shape" d="M160,268 L171,237 C173,231 180,229 186,231 C190,233 192,236 192,241
+      L196,330 L182,377 C179,383 169,383 165,378 L150,350 Z"/>
+    <!-- d-pad arm pointing up, centred on (192,307) -->
+    <path id="w-dpad-arm" d="M185.5,300.5 L185.5,289.3 A19,19 0 0 1 198.5,289.3 L198.5,300.5 L192,306 Z"/>
+  </defs>
+
+  <!-- ===== base / column (behind everything, decorative) ===== -->
+  <g id="base" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8">
+    <path d="M212,476 L388,476 L386,494 C386,496 384,497 382,497 L218,497 C216,497 214,496 214,494 Z"/>
+    <path d="M270,420 L330,420 L336,450 L264,450 Z" fill-opacity="0.6"/>
+  </g>
+
+  <!-- ===== shift paddles (behind the spokes) ===== -->
+  <g id="paddle-left" class="ctl" data-ctl="paddle-left" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1">
+    <use href="#w-paddle-shape"/>
+    <use href="#w-paddle-shape" fill="url(#w-hub)" stroke="none"/>
+  </g>
+  <g id="paddle-right" class="ctl" data-ctl="paddle-right" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1" transform="matrix(-1 0 0 1 600 0)">
+    <use href="#w-paddle-shape"/>
+    <use href="#w-paddle-shape" fill="url(#w-hub)" stroke="none"/>
+  </g>
+
+  <!-- paddle mounting bar visible between grips and hub -->
+  <g fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8">
+    <path d="M150,272 L240,261 L240,272 L150,282 Z"/>
+    <path d="M450,272 L360,261 L360,272 L450,282 Z"/>
+  </g>
+
+  <!-- ===== carbon spoke plate ===== -->
+  <g id="spokes" clip-path="url(#w-outer-clip)">
+    <use href="#w-spoke-shape" fill="var(--dev-carbon, #25272c)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <use href="#w-spoke-shape" fill="url(#w-carbon)"/>
+    <!-- button ledges under the d-pad / face cluster -->
+    <g fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6">
+      <rect x="188" y="339" width="58" height="18" rx="9" transform="rotate(4 217 348)"/>
+      <rect x="354" y="339" width="58" height="18" rx="9" transform="rotate(-4 383 348)"/>
+    </g>
+  </g>
+
+  <!-- ===== rim ===== -->
+  <g id="rim" class="ctl" data-ctl="rim" fill="var(--dev-body, #1c1e22)">
+    <use href="#w-rim-shape" stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2"/>
+    <g clip-path="url(#w-rim-clip)">
+      <!-- textured grip zones (subtle) -->
+      <path fill="url(#w-grip)" d="M172,115 L206,172 L160,300 L166,406 L127,442 L60,442 L60,115 Z"/>
+      <path fill="url(#w-grip)" d="M428,115 L394,172 L440,300 L434,406 L473,442 L540,442 L540,115 Z"/>
+      <rect x="90" y="100" width="420" height="390" fill="url(#w-sheen)"/>
+      <!-- seams between smooth leather and grips -->
+      <g stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2" fill="none">
+        <path d="M182,132 L201,164 M418,132 L399,164 M134,436 L153,418 M466,436 L447,418"/>
+      </g>
+    </g>
+  </g>
+  <rect id="rim-marker" class="ctl" data-ctl="rim-marker" fill="var(--dev-marker, #d0141b)" x="296.5" y="104" width="7" height="43" clip-path="url(#w-rim-clip)"/>
+
+  <!-- ===== centre hub ===== -->
+  <g id="hub">
+    <path fill="var(--dev-body, #1c1e22)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1.2" d="
+      M252,231 L348,231 C355,231 359,234 362,240 L378,272 C381,278 381,282 379,288 L353,345 L350,373
+      C349,378 346,380 341,380 L259,380 C254,380 251,378 250,373 L247,345 L221,288 C219,282 219,278 222,272
+      L238,240 C241,234 245,231 252,231 Z"/>
+    <!-- inner V face -->
+    <path fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.8" d="
+      M264,241 L336,241 C341,241 344,243 346,247 L359,272 C361,276 361,280 359,284 L341,339
+      C340,342 337,344 334,344 L266,344 C263,344 260,342 259,339 L241,284 C239,280 239,276 241,272
+      L254,247 C256,243 259,241 264,241 Z"/>
+    <path fill="url(#w-hub)" d="M264,241 L336,241 L359,276 L300,300 L241,276 Z"/>
+    <!-- lower lip carrying the bottom button row -->
+    <path fill="none" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6" d="M253,352 L347,352"/>
+  </g>
+
+  <!-- RGB light bar on top of the hub -->
+  <path id="led-bar" class="ctl" data-ctl="led-bar" fill="url(#w-led)" d="M253,232 L347,232 L344.5,240 L322,240 L320,238 L280,238 L278,240 L255.5,240 Z"/>
+
+  <!-- hub logo medallion -->
+  <g id="hub-logo" class="ctl" data-ctl="hub-logo" fill="var(--dev-shade, #121316)">
+    <circle cx="300" cy="303" r="31" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+    <g fill="var(--dev-label, #e6e7ea)">
+      <path d="M296,288 C284,290 279,302 284,311 C289,319 300,320 307,315 C299,317 291,313 290,305 C289,297 292,291 296,288 Z"/>
+      <path d="M299,294 C293,297 292,305 297,309 C302,313 312,311 318,302 C320,299 322,296 324,295 C320,296 317,299 314,302 C309,307 304,308 301,305 C298,302 298,297 299,294 Z"/>
+    </g>
+  </g>
+
+  <!-- ===== left d-pad ===== -->
+  <circle cx="192" cy="307" r="21.5" fill="var(--dev-shade, #121316)" stroke="var(--dev-edge, #3a3d44)" stroke-width="1"/>
+  <g fill="var(--dev-label, #e6e7ea)" fill-opacity="0.55">
+    <circle cx="192" cy="307" r="3" fill="var(--dev-ctl, #2a2d33)" fill-opacity="1"/>
+  </g>
+  <g id="dpad-up" class="ctl" data-ctl="dpad-up" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6">
+    <use href="#w-dpad-arm"/>
+    <path d="M192,291 L194.6,295.3 L189.4,295.3 Z" fill="var(--dev-label, #e6e7ea)" fill-opacity="0.6" stroke="none"/>
+  </g>
+  <g id="dpad-right" class="ctl" data-ctl="dpad-right" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6" transform="rotate(90 192 307)">
+    <use href="#w-dpad-arm"/>
+    <path d="M192,291 L194.6,295.3 L189.4,295.3 Z" fill="var(--dev-label, #e6e7ea)" fill-opacity="0.6" stroke="none"/>
+  </g>
+  <g id="dpad-down" class="ctl" data-ctl="dpad-down" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6" transform="rotate(180 192 307)">
+    <use href="#w-dpad-arm"/>
+    <path d="M192,291 L194.6,295.3 L189.4,295.3 Z" fill="var(--dev-label, #e6e7ea)" fill-opacity="0.6" stroke="none"/>
+  </g>
+  <g id="dpad-left" class="ctl" data-ctl="dpad-left" fill="var(--dev-ctl, #2a2d33)" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6" transform="rotate(270 192 307)">
+    <use href="#w-dpad-arm"/>
+    <path d="M192,291 L194.6,295.3 L189.4,295.3 Z" fill="var(--dev-label, #e6e7ea)" fill-opacity="0.6" stroke="none"/>
+  </g>
+
+  <!-- ===== right face cluster (Y top, X left, B right, A bottom) ===== -->
+  <g font-size="8" font-weight="700" text-anchor="middle" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.7">
+    <g id="btn-y" class="ctl" data-ctl="btn-y" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="411" cy="292" r="7.7"/><circle cx="411" cy="292" r="7.7" fill="url(#w-cap)" stroke="none"/>
+      <text x="411" y="294.9" fill="var(--dev-label, #e6e7ea)" stroke="none">Y</text>
+    </g>
+    <g id="btn-x" class="ctl" data-ctl="btn-x" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="396" cy="307" r="7.7"/><circle cx="396" cy="307" r="7.7" fill="url(#w-cap)" stroke="none"/>
+      <text x="396" y="309.9" fill="var(--dev-label, #e6e7ea)" stroke="none">X</text>
+    </g>
+    <g id="btn-b" class="ctl" data-ctl="btn-b" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="426" cy="307" r="7.7"/><circle cx="426" cy="307" r="7.7" fill="url(#w-cap)" stroke="none"/>
+      <text x="426" y="309.9" fill="var(--dev-label, #e6e7ea)" stroke="none">B</text>
+    </g>
+    <g id="btn-a" class="ctl" data-ctl="btn-a" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="411" cy="322" r="7.7"/><circle cx="411" cy="322" r="7.7" fill="url(#w-cap)" stroke="none"/>
+      <text x="411" y="324.9" fill="var(--dev-label, #e6e7ea)" stroke="none">A</text>
+    </g>
+  </g>
+
+  <!-- ===== small round buttons: left row, right row, bottom centre row ===== -->
+  <g font-size="3.4" font-weight="700" text-anchor="middle" stroke="var(--dev-edge, #3a3d44)" stroke-width="0.6">
+    <!-- left row: L1/LB, L2/LT, L3/SL -->
+    <g id="btn-lb" class="ctl" data-ctl="btn-lb" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="200" cy="346" r="6.5"/><circle cx="200" cy="346" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="200" y="347.2" fill="var(--dev-label, #e6e7ea)" stroke="none">LB</text>
+    </g>
+    <g id="btn-lt" class="ctl" data-ctl="btn-lt" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="217" cy="348" r="6.5"/><circle cx="217" cy="348" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="217" y="349.2" fill="var(--dev-label, #e6e7ea)" stroke="none">LT</text>
+    </g>
+    <g id="btn-sl" class="ctl" data-ctl="btn-sl" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="234" cy="350" r="6.5"/><circle cx="234" cy="350" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="234" y="351.2" fill="var(--dev-label, #e6e7ea)" stroke="none">SL</text>
+    </g>
+    <!-- right row: R3/SR, R2/RT, R1/RB -->
+    <g id="btn-sr" class="ctl" data-ctl="btn-sr" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="366" cy="350" r="6.5"/><circle cx="366" cy="350" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="366" y="351.2" fill="var(--dev-label, #e6e7ea)" stroke="none">SR</text>
+    </g>
+    <g id="btn-rt" class="ctl" data-ctl="btn-rt" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="383" cy="348" r="6.5"/><circle cx="383" cy="348" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="383" y="349.2" fill="var(--dev-label, #e6e7ea)" stroke="none">RT</text>
+    </g>
+    <g id="btn-rb" class="ctl" data-ctl="btn-rb" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="400" cy="346" r="6.5"/><circle cx="400" cy="346" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="400" y="347.2" fill="var(--dev-label, #e6e7ea)" stroke="none">RB</text>
+    </g>
+    <!-- bottom centre row: SHARE/BACK, HOME, PROG (upload arrow), OPTIONS/START -->
+    <g id="btn-back" class="ctl" data-ctl="btn-back" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="273" cy="365" r="6.5"/><circle cx="273" cy="365" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="273" y="366.1" font-size="2.6" fill="var(--dev-label, #e6e7ea)" stroke="none">SHARE</text>
+    </g>
+    <g id="btn-home" class="ctl" data-ctl="btn-home" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="291" cy="367" r="6.5"/><circle cx="291" cy="367" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <path fill="var(--dev-label, #e6e7ea)" stroke="none" d="M291,363.6 L294.4,366.6 L293.3,366.6 L293.3,370 L288.7,370 L288.7,366.6 L287.6,366.6 Z"/>
+    </g>
+    <g id="btn-prog" class="ctl" data-ctl="btn-prog" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="309" cy="367" r="6.5"/><circle cx="309" cy="367" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <g fill="none" stroke="var(--dev-label, #e6e7ea)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M306,367.5 L306,370 L312,370 L312,367.5 M309,368.6 L309,363.8 M307.3,365.5 L309,363.8 L310.7,365.5"/>
+      </g>
+    </g>
+    <g id="btn-start" class="ctl" data-ctl="btn-start" fill="var(--dev-ctl, #2a2d33)">
+      <circle cx="327" cy="365" r="6.5"/><circle cx="327" cy="365" r="6.5" fill="url(#w-cap)" stroke="none"/>
+      <text x="327" y="366.1" font-size="2.3" fill="var(--dev-label, #e6e7ea)" stroke="none">OPTIONS</text>
+    </g>
+  </g>
+
+  <!-- status LED under the bottom row -->
+  <circle id="status-led" class="ctl" data-ctl="status-led" fill="var(--dev-marker, #d0141b)" cx="300" cy="374" r="1.9"/>
+</svg>
