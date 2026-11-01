@@ -57,6 +57,12 @@ const help: Record<Lang, Record<string, SettingHelp>> = {
       body: "Stronger on fields and gravel than on asphalt, and faster as you speed up.",
       examples: ["0.25: there, but not tiring", "0.5: you feel every furrow", "0: smooth"],
     },
+    soft_lock: {
+      title: "Soft lock",
+      short: "The wheel pushes back where the in-game steering stops.",
+      body: "A game that knows its steering lock can tell the server when you turn past it. FS22_WheelFFB does this, scaled for each vehicle, so the end of the in-game steering feels like a real stop.",
+      examples: ["0.8: a firm stop", "0.4: a gentle hint", "0: off; the wheel just keeps turning"],
+    },
     engine: {
       title: "Engine vibration",
       short: "A hum that follows the rpm.",
@@ -118,6 +124,12 @@ const help: Record<Lang, Record<string, SettingHelp>> = {
       short: "Zeminden gelen ince titreşim.",
       body: "Tarlada ve çakılda asfalttan güçlüdür, hız arttıkça sıklaşır.",
       examples: ["0.25: hissedilir ama yormaz", "0.5: her saban izini hissedersiniz", "0: pürüzsüz"],
+    },
+    soft_lock: {
+      title: "Yumuşak kilit",
+      short: "Oyundaki direksiyon dayandığı yerde direksiyon geri iter.",
+      body: "Direksiyonunun nerede kilitlendiğini bilen bir oyun, o noktayı geçtiğinizi sunucuya söyleyebilir. FS22_WheelFFB bunu her araç için ayrı hesaplıyor, böylece oyundaki direksiyonun sonu gerçek bir dayanak gibi hissedilir.",
+      examples: ["0.8: sert bir dayanak", "0.4: hafif bir uyarı", "0: kapalı, direksiyon dönmeye devam eder"],
     },
     engine: {
       title: "Motor titreşimi",

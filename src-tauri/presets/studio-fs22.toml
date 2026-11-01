@@ -45,3 +45,4 @@ bumps = 0.60
 impacts = 0.80
 texture = 0.25
 engine = 0.10
+soft_lock = 0.80

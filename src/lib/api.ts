@@ -18,7 +18,7 @@ export interface LogEntry { dir: "tx" | "rx"; hex: string; note: string | null }
 
 // ---- Presets (TOML files; see docs/PRESETS.md). snake_case mirrors the files.
 export interface WheelParams { angle?: number; ffb?: number; spring?: number; damping?: number; friction?: number; inertia?: number; reverse?: boolean }
-export interface Feel { centering: number; centering_parked: number; damping: number; damping_engine_off: number; bumps: number; impacts: number; texture: number; engine: number }
+export interface Feel { centering: number; centering_parked: number; damping: number; damping_engine_off: number; bumps: number; impacts: number; texture: number; engine: number; soft_lock: number }
 export interface FfbProfile { master_gain?: number; invert?: boolean; feel?: Feel }
 export interface Preset {
   format: number; id: string; name: string; platform: string; source: "vendor" | "studio" | "user" | string;

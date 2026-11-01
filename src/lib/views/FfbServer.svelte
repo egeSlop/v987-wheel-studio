@@ -8,7 +8,7 @@
   import type { Feel, FfbConfig } from "../api";
 
   const DOCS = "https://github.com/egeSlop/ffb-server/blob/main/docs/FFB-SERVER.md";
-  const DEFAULT_FEEL: Feel = { centering: 0.55, centering_parked: 0.08, damping: 0.3, damping_engine_off: 0.65, bumps: 0.6, impacts: 0.8, texture: 0.25, engine: 0.1 };
+  const DEFAULT_FEEL: Feel = { centering: 0.55, centering_parked: 0.08, damping: 0.3, damping_engine_off: 0.65, bumps: 0.6, impacts: 0.8, texture: 0.25, engine: 0.1, soft_lock: 0.8 };
   const FEEL_KEYS = Object.keys(DEFAULT_FEEL) as (keyof Feel)[];
 
   onMount(() => watch());
