@@ -1,6 +1,6 @@
 [package]
 name = "v987-wheel-studio"
-version = "0.2.0"
+version = "0.3.0"
 description = "Settings, presets and a game-agnostic FFB server for LiteStar / Rampage Pace V987 wheels"
 authors = ["egeadam"]
 edition = "2024"
@@ -32,6 +32,8 @@ log = "0.4.35"
 reqwest = { version = "0.13", features = ["json"] }
 toml = "1.1.8"
 ffb-server = { path = "../crates/ffb-server" }
+tungstenite = "0.26"
+qrcode = { version = "0.14.1", default-features = false, features = ["svg"] }
 
 
 # Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration
@@ -41,3 +43,9 @@ lto = true
 opt-level = 3
 panic = "abort"
 strip = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+libc = "0.2.191"
+
+[target."cfg(windows)".dependencies]
+windows = { version = "0.61.3", features = ["Win32_UI_Input_KeyboardAndMouse", "Win32_Foundation"] }

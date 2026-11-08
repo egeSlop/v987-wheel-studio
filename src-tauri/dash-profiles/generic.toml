@@ -1,0 +1,33 @@
+# Any game that sends dashboard data but has no profile of its own (see docs/DASH.md).
+# Copy this file into the dash folder, give it an id and `match`, and add your buttons.
+id = "generic"
+name = "Game"
+match = []
+theme = "default"
+accent = "#7c8cff"
+
+[radio]
+mode = "tablet"
+
+[[readout]]
+field = "rpm"
+label = "Engine"
+labels = { tr = "Devir" }
+unit = "rpm"
+
+[[page]]
+name = "Keys"
+names = { tr = "Tuşlar" }
+
+  [[page.button]]
+  id = "menu"
+  label = "Esc"
+  icon = "menu"
+  key = "esc"
+
+  [[page.button]]
+  id = "pause"
+  label = "Pause"
+  labels = { tr = "Duraklat" }
+  icon = "pause"
+  key = "pause"

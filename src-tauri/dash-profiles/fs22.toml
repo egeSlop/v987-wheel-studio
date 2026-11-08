@@ -1,0 +1,364 @@
+# Farming Simulator 22. Needs the FS22_WheelFFB mod (1.7+) for telemetry.
+# Buttons name FS22 actions: the key is read from your own inputBinding.xml, so rebinding in
+# the game just works. `key` is only the fallback (FS22's defaults).
+id = "fs22"
+name = "Farming Simulator 22"
+match = ["fs22", "farming simulator 22"]
+theme = "tractor"
+accent = "#8bc34a"
+bindings = "fs22"
+
+[setup]
+en = "Install the FS22_WheelFFB mod (1.7 or newer) and start the game with its launcher."
+tr = "FS22_WheelFFB modunu (1.7 ya da üstü) kurun ve oyunu modun başlatıcısıyla açın."
+
+[radio]
+mode = "game"
+stations = "fs22"
+power = { action = "RADIO_TOGGLE", key = "5" }
+next = { action = "RADIO_NEXT_CHANNEL", key = "6" }
+prev = { action = "RADIO_PREVIOUS_CHANNEL", key = "4" }
+
+[[readout]]
+field = "fuel"
+label = "Fuel"
+labels = { tr = "Yakıt" }
+unit = "%"
+scale = 100
+
+[[readout]]
+field = "cruise"
+label = "Cruise"
+labels = { tr = "Hız sabitleyici" }
+unit = "km/h"
+
+[[readout]]
+field = "rpm"
+label = "Engine"
+labels = { tr = "Devir" }
+unit = "rpm"
+
+[[page]]
+name = "Drive"
+names = { tr = "Sürüş" }
+
+  [[page.button]]
+  id = "engine"
+  label = "Engine"
+  labels = { tr = "Motor" }
+  icon = "engine"
+  action = "TOGGLE_MOTOR_STATE"
+  key = "enter"
+  active = "engine"
+  tone = "ok"
+
+  [[page.button]]
+  id = "lights"
+  label = "Lights"
+  labels = { tr = "Farlar" }
+  icon = "lights"
+  action = "TOGGLE_LIGHTS"
+  key = "f"
+  active = "lightsLow"
+
+  [[page.button]]
+  id = "highbeam"
+  label = "High beam"
+  labels = { tr = "Uzun far" }
+  icon = "highbeam"
+  action = "TOGGLE_HIGH_BEAM_LIGHT"
+  key = "lctrl+f"
+  active = "lightsHigh"
+
+  [[page.button]]
+  id = "beacon"
+  label = "Beacon"
+  labels = { tr = "Tepe lambası" }
+  icon = "beacon"
+  action = "TOGGLE_BEACON_LIGHTS"
+  key = "home"
+  active = "beacon"
+  tone = "warn"
+
+  [[page.button]]
+  id = "left"
+  label = "Left"
+  labels = { tr = "Sol sinyal" }
+  icon = "left"
+  action = "TOGGLE_TURNLIGHT_LEFT"
+  key = "kp1"
+  active = "blinkerLeft"
+  tone = "ok"
+
+  [[page.button]]
+  id = "hazard"
+  label = "Hazards"
+  labels = { tr = "Dörtlü" }
+  icon = "hazard"
+  action = "TOGGLE_TURNLIGHT_HAZARD"
+  key = "kp2"
+  active = "hazard"
+  tone = "danger"
+
+  [[page.button]]
+  id = "right"
+  label = "Right"
+  labels = { tr = "Sağ sinyal" }
+  icon = "right"
+  action = "TOGGLE_TURNLIGHT_RIGHT"
+  key = "kp3"
+  active = "blinkerRight"
+  tone = "ok"
+
+  [[page.button]]
+  id = "horn"
+  label = "Horn"
+  labels = { tr = "Korna" }
+  icon = "horn"
+  action = "HONK"
+  key = "0"
+  hold = true
+
+  [[page.button]]
+  id = "cruise"
+  label = "Cruise"
+  labels = { tr = "Sabitleyici" }
+  icon = "cruise"
+  action = "TOGGLE_CRUISE_CONTROL"
+  key = "3"
+  active = "cruiseOn"
+
+  [[page.button]]
+  id = "workfront"
+  label = "Work lights front"
+  labels = { tr = "Ön çalışma" }
+  icon = "worklight"
+  action = "TOGGLE_WORK_LIGHT_FRONT"
+  key = "kp5"
+  active = "lightsWorkFront"
+
+  [[page.button]]
+  id = "workback"
+  label = "Work lights rear"
+  labels = { tr = "Arka çalışma" }
+  icon = "worklight"
+  action = "TOGGLE_WORK_LIGHT_BACK"
+  key = "kp6"
+  active = "lightsWorkBack"
+
+  [[page.button]]
+  id = "camera"
+  label = "Camera"
+  labels = { tr = "Kamera" }
+  icon = "camera"
+  action = "CAMERA_SWITCH"
+  key = "c"
+
+  [[page.button]]
+  id = "helper"
+  label = "Helper"
+  labels = { tr = "Yardımcı" }
+  icon = "robot"
+  action = "TOGGLE_AI"
+  key = "h"
+  active = "ai"
+
+  [[page.button]]
+  id = "switch"
+  label = "Next vehicle"
+  labels = { tr = "Sonraki araç" }
+  icon = "swap"
+  action = "SWITCH_VEHICLE"
+  key = "tab"
+
+  [[page.button]]
+  id = "exit"
+  label = "Get out"
+  labels = { tr = "Araçtan in" }
+  icon = "door"
+  action = "ENTER"
+  key = "e"
+
+[[page]]
+name = "Implements"
+names = { tr = "Ekipman" }
+
+  [[page.button]]
+  id = "attach"
+  label = "Attach"
+  labels = { tr = "Bağla" }
+  icon = "attach"
+  action = "ATTACH"
+  key = "q"
+
+  [[page.button]]
+  id = "detach"
+  label = "Detach"
+  labels = { tr = "Ayır" }
+  icon = "detach"
+  action = "DETACH"
+  key = "lctrl+q"
+
+  [[page.button]]
+  id = "select"
+  label = "Select implement"
+  labels = { tr = "Ekipman seç" }
+  icon = "select"
+  action = "SWITCH_IMPLEMENT"
+  key = "g"
+
+  [[page.button]]
+  id = "lower"
+  label = "Lower / raise"
+  labels = { tr = "İndir / kaldır" }
+  icon = "lower"
+  action = "LOWER_IMPLEMENT"
+  key = "v"
+
+  [[page.button]]
+  id = "turnon"
+  label = "Turn on / off"
+  labels = { tr = "Çalıştır / durdur" }
+  icon = "power"
+  action = "IMPLEMENT_EXTRA"
+  key = "b"
+
+  [[page.button]]
+  id = "fold"
+  label = "Fold / unfold"
+  labels = { tr = "Katla / aç" }
+  icon = "fold"
+  action = "IMPLEMENT_EXTRA2"
+  key = "x"
+
+  [[page.button]]
+  id = "lowerall"
+  label = "Lower all"
+  labels = { tr = "Hepsini indir" }
+  icon = "lower"
+  action = "LOWER_ALL_IMPLEMENTS"
+  key = "lctrl+v"
+
+  [[page.button]]
+  id = "turnonall"
+  label = "Turn on all"
+  labels = { tr = "Hepsini çalıştır" }
+  icon = "power"
+  action = "TURN_ON_ALL_IMPLEMENTS"
+  key = "lctrl+b"
+
+  [[page.button]]
+  id = "foldall"
+  label = "Fold all"
+  labels = { tr = "Hepsini katla" }
+  icon = "fold"
+  action = "FOLD_ALL_IMPLEMENTS"
+  key = "lctrl+x"
+
+  [[page.button]]
+  id = "tip"
+  label = "Tip / unload"
+  labels = { tr = "Boşalt" }
+  icon = "tip"
+  action = "TOGGLE_TIPSTATE"
+  key = "i"
+
+  [[page.button]]
+  id = "tipside"
+  label = "Tip side"
+  labels = { tr = "Boşaltma yönü" }
+  icon = "swap"
+  action = "TOGGLE_TIPSIDE"
+  key = "u"
+
+  [[page.button]]
+  id = "pipe"
+  label = "Pipe"
+  labels = { tr = "Boşaltma borusu" }
+  icon = "pipe"
+  action = "TOGGLE_PIPE"
+  key = "o"
+
+  [[page.button]]
+  id = "cover"
+  label = "Cover"
+  labels = { tr = "Branda" }
+  icon = "cover"
+  action = "TOGGLE_COVER"
+  key = "n"
+
+  [[page.button]]
+  id = "seeds"
+  label = "Seed type"
+  labels = { tr = "Tohum türü" }
+  icon = "seed"
+  action = "TOGGLE_SEEDS"
+  key = "y"
+
+[[page]]
+name = "Game"
+names = { tr = "Oyun" }
+
+  [[page.button]]
+  id = "map"
+  label = "Minimap"
+  labels = { tr = "Mini harita" }
+  icon = "map"
+  action = "TOGGLE_MAP_SIZE"
+  key = "9"
+
+  [[page.button]]
+  id = "shop"
+  label = "Shop"
+  labels = { tr = "Mağaza" }
+  icon = "shop"
+  action = "TOGGLE_STORE"
+  key = "p"
+
+  [[page.button]]
+  id = "menu"
+  label = "Menu"
+  labels = { tr = "Menü" }
+  icon = "menu"
+  action = "MENU"
+  key = "esc"
+
+  [[page.button]]
+  id = "help"
+  label = "Help box"
+  labels = { tr = "Yardım kutusu" }
+  icon = "help"
+  action = "TOGGLE_HELP_TEXT"
+  key = "f1"
+
+  [[page.button]]
+  id = "slower"
+  label = "Time slower"
+  labels = { tr = "Zamanı yavaşlat" }
+  icon = "slower"
+  action = "DECREASE_TIMESCALE"
+  key = "7"
+
+  [[page.button]]
+  id = "faster"
+  label = "Time faster"
+  labels = { tr = "Zamanı hızlandır" }
+  icon = "faster"
+  action = "INCREASE_TIMESCALE"
+  key = "8"
+
+  [[page.button]]
+  id = "screenshot"
+  label = "Screenshot"
+  labels = { tr = "Ekran görüntüsü" }
+  icon = "camera"
+  action = "TAKE_SCREENSHOT"
+  key = "print"
+
+  [[page.button]]
+  id = "pause"
+  label = "Pause"
+  labels = { tr = "Duraklat" }
+  icon = "pause"
+  action = "PAUSE"
+  key = "pause"

@@ -1,0 +1,84 @@
+# Assetto Corsa. Telemetry: the game's built-in UDP telemetry on port 9996, nothing to
+# install. ABS/TC keys are AC's defaults; check the headlight key in AC's Controls menu.
+id = "ac"
+name = "Assetto Corsa"
+match = ["ac", "assetto"]
+theme = "race"
+accent = "#e53935"
+
+[setup]
+en = "Nothing to install. Start a session and Wheel Studio connects to Assetto Corsa's telemetry by itself."
+tr = "Kurulacak bir şey yok. Bir oturum başlatın, Wheel Studio Assetto Corsa'nın telemetrisine kendisi bağlanır."
+
+[radio]
+mode = "tablet"
+
+[[readout]]
+field = "lap"
+label = "Lap"
+labels = { tr = "Tur" }
+
+[[readout]]
+field = "lapTime"
+label = "Lap time"
+labels = { tr = "Tur süresi" }
+format = "laptime"
+
+[[readout]]
+field = "lastLap"
+label = "Last"
+labels = { tr = "Son tur" }
+format = "laptime"
+
+[[readout]]
+field = "bestLap"
+label = "Best"
+labels = { tr = "En iyi" }
+format = "laptime"
+
+[[page]]
+name = "Car"
+names = { tr = "Araç" }
+
+  [[page.button]]
+  id = "abs"
+  label = "ABS"
+  icon = "abs"
+  key = "lctrl+a"
+  active = "absOn"
+
+  [[page.button]]
+  id = "tc"
+  label = "Traction control"
+  labels = { tr = "Çekiş kontrolü" }
+  icon = "tc"
+  key = "lctrl+t"
+  active = "tcOn"
+
+  [[page.button]]
+  id = "lights"
+  label = "Lights"
+  labels = { tr = "Farlar" }
+  icon = "lights"
+  key = "lctrl+l"
+
+  [[page.button]]
+  id = "camera"
+  label = "Camera"
+  labels = { tr = "Kamera" }
+  icon = "camera"
+  key = "f1"
+
+  [[page.button]]
+  id = "carcams"
+  label = "Car cameras"
+  labels = { tr = "Araç kameraları" }
+  icon = "camera"
+  key = "f6"
+
+  [[page.button]]
+  id = "menu"
+  label = "Menu"
+  labels = { tr = "Menü" }
+  icon = "menu"
+  key = "esc"

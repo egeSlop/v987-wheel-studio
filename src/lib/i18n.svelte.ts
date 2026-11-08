@@ -57,6 +57,7 @@ const en: Dict = {
   language: "Language", theme: "Theme",
 
   tabFfb: "FFB server",
+  tabTablet: "Tablet dashboard",
   ffbIntro: "Some games can't drive your wheel's force feedback on Linux. For those, a small mod sends the game's vehicle data to this server, and the server turns it into centering, steering weight, bumps and vibration. Farming Simulator 22 works this way with the FS22_WheelFFB mod. You can write a mod for another game using the same connection.",
   ffbRunning: "Running", ffbStopped: "Stopped", ffbStart: "Start server", ffbStop: "Stop",
   ffbExternal: "Another FFB server is running",
@@ -126,6 +127,7 @@ const tr: Dict = {
   language: "Dil", theme: "Tema",
 
   tabFfb: "FFB sunucusu",
+  tabTablet: "Tablet paneli",
   ffbIntro: "Bazı oyunlar Linux'ta direksiyonun FFB'sini çalıştıramıyor. Bu oyunlarda küçük bir mod aracın verilerini bu sunucuya gönderir, sunucu da bunları merkezlemeye, direksiyon ağırlığına, tümseklere ve titreşime çevirir. Farming Simulator 22, FS22_WheelFFB moduyla böyle çalışıyor. Aynı bağlantıyı kullanarak başka bir oyun için de mod yazabilirsiniz.",
   ffbRunning: "Çalışıyor", ffbStopped: "Kapalı", ffbStart: "Sunucuyu başlat", ffbStop: "Durdur",
   ffbExternal: "Başka bir FFB sunucusu çalışıyor",

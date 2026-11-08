@@ -33,6 +33,16 @@ through [FS22_WheelFFB](https://github.com/egeSlop/FS22_WheelFFB). The server is
 [ffb-server](https://github.com/egeSlop/ffb-server), and its protocol is documented so anyone can
 write a mod for another game.
 
+**Tablet dashboard.** Open the address Wheel Studio shows (or scan its QR code) on a tablet or
+phone on the same Wi-Fi. You get a car-radio screen with speed, gear, rpm, fuel and indicator
+lights from the game, and a panel of buttons that press the game's keys on the PC: lights,
+beacon, indicators, horn, cruise control, implements, cameras. The radio either works the game's
+own radio or plays internet radio on the tablet (your FS22 stations are included). The page
+keeps the screen on with a silent video and has a full-screen button. Farming Simulator 22, Euro
+Truck Simulator 2, American Truck Simulator, Assetto Corsa and DiRT Rally 2.0 have profiles;
+any other game can send data from a mod and get its own profile, described in
+[docs/DASH.md](docs/DASH.md). Only FS22 has been tried in the actual game so far.
+
 **Labs.** Features that exist in the vendor's firmware kit but aren't shown for this wheel. Each one
 can be checked with a single harmless request.
 

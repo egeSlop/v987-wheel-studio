@@ -1,3 +1,4 @@
+mod dash;
 mod link;
 mod presets;
 mod protocol;
@@ -297,11 +298,156 @@ fn ffb_test(ffb: State<'_, Ffb>) -> Res<bool> {
     }
 }
 
+// ---------------------------------------------------------------- tablet dashboard
+
+#[derive(Default)]
+struct Dash {
+    server: Mutex<Option<dash::DashServer>>,
+    last_error: Mutex<Option<String>>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DashState {
+    running: bool,
+    error: Option<String>,
+    config: dash::Config,
+    status: Option<dash::Status>,
+    setup: Vec<dash::SetupInfo>,
+    config_path: String,
+}
+
+fn dash_state_of(d: &Dash, with_setup: bool) -> DashState {
+    let srv = d.server.lock().unwrap();
+    DashState {
+        running: srv.is_some(),
+        error: if srv.is_some() { None } else { d.last_error.lock().unwrap().clone() },
+        config: srv.as_ref().map(|s| s.config()).unwrap_or_else(dash::load_config),
+        status: srv.as_ref().map(|s| s.status()),
+        setup: if with_setup { dash::setup_status() } else { Vec::new() },
+        config_path: dash::config_path().display().to_string(),
+    }
+}
+
+fn start_dash(d: &Dash) -> Result<(), String> {
+    let mut srv = d.server.lock().unwrap();
+    if srv.is_some() {
+        return Ok(());
+    }
+    match dash::DashServer::start(dash::load_config()) {
+        Ok(s) => {
+            // Create the virtual keyboard early so the desktop knows it before the first press.
+            let _ = s.warm_keyboard();
+            *srv = Some(s);
+            *d.last_error.lock().unwrap() = None;
+            Ok(())
+        }
+        Err(e) => {
+            let msg = format!("{e:#}");
+            *d.last_error.lock().unwrap() = Some(msg.clone());
+            Err(msg)
+        }
+    }
+}
+
+#[tauri::command]
+fn dash_state(d: State<'_, Dash>, setup: Option<bool>) -> DashState {
+    dash_state_of(&d, setup.unwrap_or(false))
+}
+
+#[tauri::command]
+fn dash_start(d: State<'_, Dash>) -> Res<DashState> {
+    start_dash(&d)?;
+    Ok(dash_state_of(&d, false))
+}
+
+#[tauri::command]
+fn dash_stop(d: State<'_, Dash>) -> DashState {
+    if let Some(s) = d.server.lock().unwrap().take() {
+        s.stop();
+    }
+    *d.last_error.lock().unwrap() = None;
+    dash_state_of(&d, false)
+}
+
+#[tauri::command]
+fn dash_set_config(d: State<'_, Dash>, config: dash::Config) -> Res<DashState> {
+    let restart = {
+        let srv = d.server.lock().unwrap();
+        match srv.as_ref() {
+            Some(s) => s.set_config(config).map_err(|e| e.to_string())?,
+            None => {
+                dash::save_config(&config).map_err(|e| e.to_string())?;
+                false
+            }
+        }
+    };
+    if restart {
+        if let Some(s) = d.server.lock().unwrap().take() {
+            s.stop();
+        }
+        std::thread::sleep(std::time::Duration::from_millis(150));
+        let _ = start_dash(&d);
+    }
+    Ok(dash_state_of(&d, false))
+}
+
+#[tauri::command]
+fn dash_new_pin(d: State<'_, Dash>) -> Res<DashState> {
+    let mut c = d.server.lock().unwrap().as_ref().map(|s| s.config()).unwrap_or_else(dash::load_config);
+    c.pin = dash::new_pin();
+    dash_set_config(d, c)
+}
+
+#[tauri::command]
+async fn dash_setup_game(id: String) -> Res<String> {
+    tauri::async_runtime::spawn_blocking(move || dash::setup_game(&id)).await.map_err(|e| e.to_string())?
+}
+
+#[tauri::command]
+fn dash_test(d: State<'_, Dash>, profile: String, button: String) -> Res<String> {
+    match d.server.lock().unwrap().as_ref() {
+        Some(s) => s.test_press(&profile, &button),
+        None => Err("Start the tablet server first.".into()),
+    }
+}
+
+#[tauri::command]
+fn dash_reload(d: State<'_, Dash>) -> DashState {
+    if let Some(s) = d.server.lock().unwrap().as_ref() {
+        s.reload_profiles();
+    }
+    dash_state_of(&d, false)
+}
+
+/// Opens the folder for custom profiles (creating it, with a README, the first time).
+#[tauri::command]
+fn dash_open_profiles() -> Res<String> {
+    let dir = dash::profiles::user_dir();
+    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    let readme = dir.join("README.txt");
+    if !readme.exists() {
+        let _ = std::fs::write(
+            &readme,
+            "Custom tablet profiles for V987 Wheel Studio.\n\nPut one .toml file per game here. A file with the same id as a built-in profile\n(fs22, ets2, ats, ac, dr2, generic) replaces it. stations.toml adds tablet radio stations.\nFormat: https://github.com/egeSlop/v987-wheel-studio/blob/main/docs/DASH.md\n",
+        );
+    }
+    let opener = if cfg!(windows) { "explorer" } else if cfg!(target_os = "macos") { "open" } else { "xdg-open" };
+    std::process::Command::new(opener).arg(&dir).spawn().map_err(|e| e.to_string())?;
+    Ok(dir.display().to_string())
+}
+
 pub const APP_NAME: &str = "V987 Wheel Studio";
 
 /// `v987-wheel-studio --ffb-server [run|test|config]`: the server without a window,
 /// for game launch scripts.
 pub fn headless(args: &[&str]) -> anyhow::Result<()> {
+    // The tablet dashboard comes along when the server runs (not for `test` or `config`).
+    let _dash = if matches!(args.first(), None | Some(&"run")) && dash::load_config().autostart {
+        dash::DashServer::start(dash::load_config()).map_err(|e| eprintln!("[dash] not started: {e:#}")).ok()
+    } else {
+        None
+    };
     ffb_server::cli::run(args, APP_NAME)
 }
 
@@ -310,12 +456,19 @@ pub fn run() {
     let app = tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .manage(Ffb::default())
+        .manage(Dash::default())
         .setup(|app| {
             app.manage(Link::new(app.handle().clone()));
             if ffb_server::config::load().autostart {
                 let ffb = app.state::<Ffb>();
                 if let Err(e) = start_ffb(&ffb) {
                     eprintln!("[wheel-studio] FFB server not started: {e}");
+                }
+            }
+            if dash::load_config().autostart {
+                let d = app.state::<Dash>();
+                if let Err(e) = start_dash(&d) {
+                    eprintln!("[wheel-studio] tablet server not started: {e}");
                 }
             }
             Ok(())
@@ -344,7 +497,16 @@ pub fn run() {
             ffb_start,
             ffb_stop,
             ffb_set_config,
-            ffb_test
+            ffb_test,
+            dash_state,
+            dash_start,
+            dash_stop,
+            dash_set_config,
+            dash_new_pin,
+            dash_setup_game,
+            dash_test,
+            dash_reload,
+            dash_open_profiles
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
@@ -352,6 +514,9 @@ pub fn run() {
         if let tauri::RunEvent::Exit = event {
             // Stop cleanly so the wheel's effects are removed and it returns to its idle spring.
             if let Some(s) = handle.state::<Ffb>().server.lock().unwrap().take() {
+                s.stop();
+            }
+            if let Some(s) = handle.state::<Dash>().server.lock().unwrap().take() {
                 s.stop();
             }
         }

@@ -1,0 +1,21 @@
+[package]
+name = "v987_dash"
+version = "1.0.0"
+edition = "2021"
+description = "SCS Telemetry SDK plugin (ETS2/ATS) that streams truck state as JSON over UDP"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+
+# Standalone crate: keep cargo from walking up into another workspace.
+[workspace]
+
+[profile.release]
+panic = "unwind" # every FFI entry point catches panics (see guard() in lib.rs)
+opt-level = 2
+lto = true
+codegen-units = 1
+strip = true

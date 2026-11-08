@@ -1,0 +1,295 @@
+# American Truck Simulator (same plugin and controls as ETS2). Telemetry comes from the v987-dash SDK plugin, which Wheel Studio
+# installs (Tablet page > Set up). Buttons name ETS2 controls (`action`): the key is read
+# from your ATS profile's controls file, so rebinding in the game just works. `key` is the
+# fallback (the SCS defaults).
+id = "ats"
+name = "American Truck Simulator"
+match = ["ats", "american truck"]
+theme = "truck"
+accent = "#ef5350"
+bindings = "ats"
+
+[setup]
+en = "Install the telemetry plugin from Wheel Studio (Tablet page). On the first start ATS asks about advanced SDK features: press OK."
+tr = "Telemetri eklentisini Wheel Studio'dan kurun (Tablet sayfası). ATS ilk açılışta gelişmiş SDK özelliklerini soracak, Tamam deyin."
+
+[radio]
+mode = "game"
+power = { action = "radio", key = "r" }
+next = { action = "radionext", key = "pagedown" }
+prev = { action = "radioprev", key = "pageup" }
+
+[[readout]]
+field = "speedLimit"
+label = "Limit"
+labels = { tr = "Hız sınırı" }
+unit = "km/h"
+
+[[readout]]
+field = "cruise"
+label = "Cruise"
+labels = { tr = "Sabitleyici" }
+unit = "km/h"
+
+[[readout]]
+field = "navDistance"
+label = "To go"
+labels = { tr = "Kalan yol" }
+unit = "km"
+decimals = 1
+
+[[readout]]
+field = "fuelRange"
+label = "Range"
+labels = { tr = "Menzil" }
+unit = "km"
+
+[[page]]
+name = "Drive"
+names = { tr = "Sürüş" }
+
+  [[page.button]]
+  id = "engine"
+  label = "Engine"
+  labels = { tr = "Motor" }
+  icon = "engine"
+  action = "engine"
+  key = "e"
+  active = "engine"
+  tone = "ok"
+
+  [[page.button]]
+  id = "parkbrake"
+  label = "Parking brake"
+  labels = { tr = "El freni" }
+  icon = "parkbrake"
+  action = "parkingbrake"
+  key = "space"
+  active = "parkingBrake"
+  tone = "danger"
+
+  [[page.button]]
+  id = "lights"
+  label = "Lights"
+  labels = { tr = "Farlar" }
+  icon = "lights"
+  action = "light"
+  key = "l"
+  active = "lightsLow"
+
+  [[page.button]]
+  id = "highbeam"
+  label = "High beam"
+  labels = { tr = "Uzun far" }
+  icon = "highbeam"
+  action = "hblight"
+  key = "k"
+  active = "lightsHigh"
+
+  [[page.button]]
+  id = "left"
+  label = "Left"
+  labels = { tr = "Sol sinyal" }
+  icon = "left"
+  action = "lblinker"
+  key = "bracketleft"
+  active = "blinkerLeft"
+  tone = "ok"
+
+  [[page.button]]
+  id = "hazard"
+  label = "Hazards"
+  labels = { tr = "Dörtlü" }
+  icon = "hazard"
+  action = "flasher4way"
+  key = "f"
+  active = "hazard"
+  tone = "danger"
+
+  [[page.button]]
+  id = "right"
+  label = "Right"
+  labels = { tr = "Sağ sinyal" }
+  icon = "right"
+  action = "rblinker"
+  key = "bracketright"
+  active = "blinkerRight"
+  tone = "ok"
+
+  [[page.button]]
+  id = "beacon"
+  label = "Beacon"
+  labels = { tr = "Tepe lambası" }
+  icon = "beacon"
+  action = "beacon"
+  key = "o"
+  active = "beacon"
+  tone = "warn"
+
+  [[page.button]]
+  id = "horn"
+  label = "Horn"
+  labels = { tr = "Korna" }
+  icon = "horn"
+  action = "horn"
+  key = "h"
+  hold = true
+
+  [[page.button]]
+  id = "airhorn"
+  label = "Air horn"
+  labels = { tr = "Havalı korna" }
+  icon = "horn"
+  action = "airhorn"
+  key = "n"
+  hold = true
+
+  [[page.button]]
+  id = "cruise"
+  label = "Cruise"
+  labels = { tr = "Sabitleyici" }
+  icon = "cruise"
+  action = "cruiectrl"
+  key = "c"
+  active = "cruiseOn"
+
+  [[page.button]]
+  id = "wipers"
+  label = "Wipers"
+  labels = { tr = "Silecek" }
+  icon = "wipers"
+  action = "wipers"
+  key = "p"
+  active = "wipers"
+
+[[page]]
+name = "Truck"
+names = { tr = "Tır" }
+
+  [[page.button]]
+  id = "trailer"
+  label = "Trailer"
+  labels = { tr = "Dorse" }
+  icon = "attach"
+  action = "attach"
+  key = "t"
+
+  [[page.button]]
+  id = "difflock"
+  label = "Diff lock"
+  labels = { tr = "Diferansiyel kilidi" }
+  icon = "lock"
+  action = "diflock"
+  key = "v"
+
+  [[page.button]]
+  id = "liftaxle"
+  label = "Lift axle"
+  labels = { tr = "Dingil kaldır" }
+  icon = "lower"
+  action = "liftaxle"
+  key = "u"
+
+  [[page.button]]
+  id = "cabin"
+  label = "Cabin camera"
+  labels = { tr = "Kabin kamerası" }
+  icon = "camera"
+  action = "cam1"
+  key = "1"
+
+  [[page.button]]
+  id = "chase"
+  label = "Chase camera"
+  labels = { tr = "Dış kamera" }
+  icon = "camera"
+  action = "cam2"
+  key = "2"
+
+  [[page.button]]
+  id = "map"
+  label = "Map"
+  labels = { tr = "Harita" }
+  icon = "map"
+  action = "navmap"
+  key = "m"
+
+  [[page.button]]
+  id = "quicksave"
+  label = "Quick save"
+  labels = { tr = "Hızlı kayıt" }
+  icon = "save"
+  action = "quicksave"
+  key = "scrolllock"
+
+  [[page.button]]
+  id = "retarderup"
+  label = "Retarder +"
+  labels = { tr = "Retarder +" }
+  icon = "plus"
+  action = "retarderup"
+  key = "semicolon"
+
+  [[page.button]]
+  id = "retarderdown"
+  label = "Retarder −"
+  labels = { tr = "Retarder −" }
+  icon = "minus"
+  action = "retarderdown"
+  key = "apostrophe"
+
+  [[page.button]]
+  id = "enginebrake"
+  label = "Engine brake"
+  labels = { tr = "Motor freni" }
+  icon = "lower"
+  action = "motorbrake"
+  key = "b"
+
+  [[page.button]]
+  id = "flash"
+  label = "Flash lights"
+  labels = { tr = "Selektör" }
+  icon = "highbeam"
+  action = "lighthorn"
+  key = "j"
+  hold = true
+
+  [[page.button]]
+  id = "mirrors"
+  label = "Mirrors"
+  labels = { tr = "Aynalar" }
+  icon = "mirror"
+  action = "showmirrors"
+  key = "f2"
+
+  [[page.button]]
+  id = "hud"
+  label = "HUD"
+  icon = "hud"
+  action = "showhud"
+  key = "f3"
+
+  [[page.button]]
+  id = "display"
+  label = "Dash display"
+  labels = { tr = "Gösterge ekranı" }
+  icon = "display"
+  action = "display"
+  key = "i"
+
+  [[page.button]]
+  id = "park"
+  label = "Auto park"
+  labels = { tr = "Otomatik park" }
+  icon = "parking"
+  action = "quickpark"
+  key = "q"
+
+  [[page.button]]
+  id = "menu"
+  label = "Menu"
+  labels = { tr = "Menü" }
+  icon = "menu"
+  action = "menu"
+  key = "esc"

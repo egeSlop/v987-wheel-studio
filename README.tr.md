@@ -33,6 +33,16 @@ oyunu, o anki kuvvetleri ve sürerken hissi değiştiren kaydırıcıları göst
 [ffb-server](https://github.com/egeSlop/ffb-server). Protokolü belgelendi, yani herkes başka bir oyun
 için mod yazabilir.
 
+**Tablet paneli.** Wheel Studio'nun gösterdiği adresi aynı Wi-Fi'daki bir tablette ya da telefonda
+açın (ya da QR kodu okutun). Karşınıza oyundan hız, vites, devir, yakıt ve sinyal lambalarını
+gösteren bir oto teyp ekranı çıkar. Altında da PC'de oyunun tuşlarına basan butonlar var: farlar,
+tepe lambası, sinyaller, korna, hız sabitleyici, ekipmanlar, kameralar. Radyo ya oyunun kendi
+radyosunu kullanır ya da tabletten internet radyosu çalar (FS22'ye eklediğiniz istasyonlar da
+listede). Sayfa sessiz bir videoyla ekranı açık tutar, tam ekran tuşu da var. Farming Simulator 22,
+Euro Truck Simulator 2, American Truck Simulator, Assetto Corsa ve DiRT Rally 2.0 için profil hazır.
+Başka bir oyun da bir modla veri gönderip kendi profilini alabilir, nasıl yapılacağı
+[docs/DASH.md](docs/DASH.md) dosyasında. Şimdilik oyunun içinde sadece FS22 denendi.
+
 **Deneysel.** Üreticinin yazılım altyapısında olan ama bu direksiyon için gösterilmeyen özellikler.
 Her biri zararsız tek bir istekle denenebilir.
 

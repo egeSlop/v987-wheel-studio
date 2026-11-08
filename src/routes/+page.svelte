@@ -13,6 +13,7 @@
   import Device from "$lib/views/Device.svelte";
   import Labs from "$lib/views/Labs.svelte";
   import FfbServer from "$lib/views/FfbServer.svelte";
+  import Tablet from "$lib/views/Tablet.svelte";
   import Connect from "$lib/components/Connect.svelte";
   import { ffb, watch } from "$lib/ffb.svelte";
 
@@ -22,6 +23,7 @@
     { id: "buttons", k: "tabButtons", icon: "M5 7a2 2 0 1 0 4 0 2 2 0 1 0-4 0m10 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0M5 17a2 2 0 1 0 4 0 2 2 0 1 0-4 0m10 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0", C: Buttons },
     { id: "pedals", k: "tabPedals", icon: "M4 20L20 4M4 20c8 0 10-6 16-16", C: Pedals },
     { id: "ffb", k: "tabFfb", icon: "M13 2L4 14h7l-1 8 9-12h-7z", C: FfbServer, free: true },
+    { id: "tablet", k: "tabTablet", icon: "M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM11 18h2", C: Tablet, free: true },
     { id: "presets", k: "tabPresets", icon: "M5 4h14v16l-7-4-7 4z", C: Presets, free: true },
     { id: "device", k: "tabDevice", icon: "M9 3h6v4H9zM5 7h14v14H5zM9 12h6m-6 4h4", C: Device },
     { id: "labs", k: "tabLabs", icon: "M9 3h6M10 3v6L5 19a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-5-10V3", C: Labs },

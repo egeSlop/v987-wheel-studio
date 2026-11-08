@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b0d10">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wheel Dash">
+<title>Wheel Dash</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-256.png">
+<link rel="apple-touch-icon" href="icon-256.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-theme="default">
+<!-- Silent, muted, looping video: keeps the screen awake where the Wake Lock API isn't
+     available (plain http on the LAN is not a secure context). -->
+<video id="wake" src="wake.mp4" muted playsinline loop preload="auto" aria-hidden="true"></video>
+<audio id="radio" preload="none"></audio>
+
+<div id="app">
+  <header class="bar">
+    <button class="game" id="gameChip" aria-label="Profile">
+      <span class="dot"></span>
+      <span class="gname" id="gameName">–</span>
+      <span class="gstate" id="gameState"></span>
+    </button>
+    <div class="clock" id="clock">--:--</div>
+    <div class="tools">
+      <span class="pill warn hidden" id="lockPill"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z"/></svg><span data-t="locked"></span></span>
+      <button class="icon" id="awakeBtn" aria-label="Keep screen on"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zm10-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></button>
+      <button class="icon" id="fsBtn" aria-label="Full screen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <button class="icon" id="setBtn" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm8.4 4.6-1.6-.9a7 7 0 0 0 0-1.4l1.6-.9-2-3.4-1.6.9a7 7 0 0 0-1.2-.7V4.4h-4v1.8a7 7 0 0 0-1.2.7l-1.6-.9-2 3.4 1.6.9a7 7 0 0 0 0 1.4l-1.6.9 2 3.4 1.6-.9c.4.3.8.5 1.2.7v1.8h4v-1.8c.4-.2.8-.4 1.2-.7l1.6.9z"/></svg></button>
+    </div>
+  </header>
+
+  <section class="top">
+    <!-- Head unit: the "radio" -->
+    <div class="unit" id="unit">
+      <div class="lcd" id="lcd">
+        <div class="lcd-top">
+          <span class="band" id="band">FM</span>
+          <span class="rds" id="rds"><span id="rdsText"></span></span>
+          <span class="vol" id="volView"></span>
+        </div>
+        <div class="station" id="station">–</div>
+        <div class="lcd-bottom">
+          <span class="freq" id="freq"></span>
+          <span class="rstate" id="radioState"></span>
+        </div>
+      </div>
+      <div class="hw">
+        <button class="hk" data-radio="power" aria-label="Power"><svg viewBox="0 0 24 24"><path d="M12 3v8M6.3 7a8 8 0 1 0 11.4 0"/></svg></button>
+        <button class="hk" data-radio="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M19 5v14L9 12zM6 5v14"/></svg></button>
+        <button class="hk" data-radio="next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M5 5v14l10-7zM18 5v14"/></svg></button>
+        <button class="hk" data-radio="volDown" aria-label="Volume down"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 12h5"/></svg></button>
+        <button class="hk" data-radio="volUp" aria-label="Volume up"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 12h5M18.5 9.5v5"/></svg></button>
+        <button class="hk src" id="srcBtn" aria-label="Source"><span id="srcLabel">SRC</span></button>
+      </div>
+      <div class="presets" id="presets"></div>
+    </div>
+
+    <!-- Cluster -->
+    <div class="cluster" id="cluster">
+      <div class="speed-row">
+        <div class="speed"><span id="speed">0</span><small id="speedUnit">km/h</small></div>
+        <div class="gear" id="gearBox"><small data-t="gear"></small><span id="gear">–</span></div>
+      </div>
+      <div class="bars">
+        <div class="barrow" id="rpmRow"><span class="lbl">RPM</span><div class="track"><i id="rpmBar"></i><b class="red"></b></div><span class="val" id="rpmVal"></span></div>
+        <div class="barrow" id="fuelRow"><span class="lbl" data-t="fuel"></span><div class="track"><i id="fuelBar"></i></div><span class="val" id="fuelVal"></span></div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="tells" id="tells"></div>
+      <div class="waiting hidden" id="waiting">
+        <div class="wt" data-t="waiting"></div>
+        <div class="ws" id="waitingHint"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <nav class="pages" id="pages"></nav>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <div class="conn hidden" id="conn"><span class="spin"></span><span id="connText"></span></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<!-- First tap: full screen, keep awake, unlock audio. -->
+<div class="overlay" id="start">
+  <div class="start-card">
+    <img src="icon-256.png" alt="" class="logo">
+    <h1>Wheel Dash</h1>
+    <p data-t="startBody"></p>
+    <button class="big" id="startBtn" data-t="start"></button>
+    <label class="check"><input type="checkbox" id="startFs" checked> <span data-t="startFs"></span></label>
+  </div>
+</div>
+
+<!-- PIN pad -->
+<div class="overlay hidden" id="pinBox">
+  <div class="start-card pin-card">
+    <h2 data-t="pinTitle"></h2>
+    <p data-t="pinBody"></p>
+    <div class="pin-dots" id="pinDots"></div>
+    <div class="pinpad" id="pinpad"></div>
+    <p class="err" id="pinErr"></p>
+    <button class="ghost" id="pinCancel" data-t="later"></button>
+  </div>
+</div>
+
+<!-- Settings sheet -->
+<div class="overlay hidden" id="settings">
+  <div class="sheet">
+    <div class="sheet-head"><h2 data-t="settings"></h2><button class="icon" id="setClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="field"><span data-t="profile"></span><select id="setProfile"></select></div>
+    <div class="field"><span data-t="language"></span><select id="setLang"><option value="auto">Auto</option><option value="en">English</option><option value="tr">Türkçe</option></select></div>
+    <div class="field"><span data-t="units"></span><select id="setUnits"><option value="auto">Auto</option><option value="kmh">km/h</option><option value="mph">mph</option></select></div>
+    <div class="field"><span data-t="size"></span><select id="setSize"><option value="m" data-t="sizeM"></option><option value="l" data-t="sizeL"></option><option value="xl" data-t="sizeXL"></option></select></div>
+    <div class="field"><span data-t="layout"></span><select id="setLayout"><option value="both" data-t="layoutBoth"></option><option value="buttons" data-t="layoutButtons"></option><option value="radio" data-t="layoutRadio"></option></select></div>
+    <label class="field"><span data-t="night"></span><input type="checkbox" id="setNight"></label>
+    <label class="field"><span data-t="haptics"></span><input type="checkbox" id="setHaptics"></label>
+    <label class="field"><span data-t="awake"></span><input type="checkbox" id="setAwake"></label>
+    <div class="about" id="about"></div>
+    <div class="sheet-actions">
+      <button class="ghost" id="pairBtn" data-t="pair"></button>
+      <button class="ghost" id="unpairBtn" data-t="unpair"></button>
+      <button class="ghost" id="reloadBtn" data-t="reload"></button>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

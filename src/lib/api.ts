@@ -39,6 +39,20 @@ export interface FfbStatus {
 }
 export interface FfbState { running: boolean; error: string | null; external: boolean; status: FfbStatus | null; config: FfbConfig; configPath: string }
 
+// ---- Tablet dashboard
+export interface DashConfig { autostart: boolean; port: number; pin: string; require_pin: boolean }
+export interface DashTablet { id: number; peer: string; device: string; paired: boolean; connectedMs: number; presses: number }
+export interface DashSource { up: boolean; error: string | null; lastDataMs: number | null; game: string | null }
+export interface DashGame { profile: string; game: string; name: string; source: string; active: boolean; ageMs: number; data: Record<string, unknown> }
+export interface DashButtonInfo { id: string; label: string; labels: Record<string, string>; key: string; action: string }
+export interface DashProfileInfo { id: string; name: string; origin: string; buttons: DashButtonInfo[]; setup: Record<string, string> }
+export interface DashStatus {
+  port: number; urls: string[]; pairUrl: string; qrSvg: string; tablets: DashTablet[]; sources: Record<string, DashSource>;
+  game: DashGame | null; keyboardReady: boolean; keyboardError: string | null; profiles: DashProfileInfo[]; profileErrors: string[]; profilesDir: string;
+}
+export interface DashSetup { id: string; state: "ready" | "missing" | "absent" | "manual"; detail: string; path: string | null }
+export interface DashState { running: boolean; error: string | null; config: DashConfig; status: DashStatus | null; setup: DashSetup[]; configPath: string }
+
 export const api = {
   scan: (millis = 4000) => invoke<FoundDevice[]>("scan", { millis }),
   connect: (id: string) => invoke<{ name: string; state: DeviceState | null }>("connect", { id }),
@@ -65,6 +79,15 @@ export const api = {
   ffbStop: () => invoke<FfbState>("ffb_stop"),
   ffbSetConfig: (config: FfbConfig) => invoke<FfbState>("ffb_set_config", { config }),
   ffbTest: () => invoke<boolean>("ffb_test"),
+  dashState: (setup = false) => invoke<DashState>("dash_state", { setup }),
+  dashStart: () => invoke<DashState>("dash_start"),
+  dashStop: () => invoke<DashState>("dash_stop"),
+  dashSetConfig: (config: DashConfig) => invoke<DashState>("dash_set_config", { config }),
+  dashNewPin: () => invoke<DashState>("dash_new_pin"),
+  dashSetupGame: (id: string) => invoke<string>("dash_setup_game", { id }),
+  dashTest: (profile: string, button: string) => invoke<string>("dash_test", { profile, button }),
+  dashReload: () => invoke<DashState>("dash_reload"),
+  dashOpenProfiles: () => invoke<string>("dash_open_profiles"),
 };
 
 export const on = {

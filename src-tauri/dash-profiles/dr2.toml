@@ -1,0 +1,74 @@
+# DiRT Rally 2.0. Telemetry: the game's UDP output on port 20777, which Wheel Studio can
+# switch on (Tablet page > Set up). Keys are the game's keyboard defaults.
+id = "dr2"
+name = "DiRT Rally 2.0"
+match = ["dr2", "dirt rally"]
+theme = "rally"
+accent = "#29b6f6"
+
+[setup]
+en = "Switch on the game's telemetry from Wheel Studio (Tablet page), or set udp enabled=\"true\" extradata=\"3\" port=\"20777\" in hardware_settings_config.xml."
+tr = "Oyunun telemetrisini Wheel Studio'dan açın (Tablet sayfası) ya da hardware_settings_config.xml içinde udp enabled=\"true\" extradata=\"3\" port=\"20777\" yapın."
+
+[radio]
+mode = "tablet"
+
+[[readout]]
+field = "progress"
+label = "Stage"
+labels = { tr = "Etap" }
+unit = "%"
+scale = 100
+
+[[readout]]
+field = "lapTime"
+label = "Time"
+labels = { tr = "Süre" }
+format = "laptime"
+
+[[readout]]
+field = "distance"
+label = "Distance"
+labels = { tr = "Mesafe" }
+unit = "km"
+decimals = 2
+
+[[page]]
+name = "Car"
+names = { tr = "Araç" }
+
+  [[page.button]]
+  id = "lights"
+  label = "Lights"
+  labels = { tr = "Farlar" }
+  icon = "lights"
+  key = "h"
+
+  [[page.button]]
+  id = "wipers"
+  label = "Wipers"
+  labels = { tr = "Silecek" }
+  icon = "wipers"
+  key = "w"
+
+  [[page.button]]
+  id = "camera"
+  label = "Camera"
+  labels = { tr = "Kamera" }
+  icon = "camera"
+  key = "c"
+
+  [[page.button]]
+  id = "lookback"
+  label = "Look back"
+  labels = { tr = "Arkaya bak" }
+  icon = "lookback"
+  key = "m"
+  hold = true
+
+  [[page.button]]
+  id = "menu"
+  label = "Pause"
+  labels = { tr = "Duraklat" }
+  icon = "pause"
+  key = "esc"
